@@ -21,5 +21,23 @@ namespace CSharpFundamentals.WorkingWithText
             string t = i.ToString("c");
             string u = i.ToString("c0");
         }
+
+        public void StringDemo()
+        {
+            var fullName = "    Ruchi Bheke     ";
+            Console.WriteLine("1 Trim: '{0}'", fullName.Trim());
+            Console.WriteLine("2 ToUpper: {0}", fullName.Trim().ToUpper());
+            var index = fullName.IndexOf(' ');
+            var firstname = fullName.Substring(0, index);
+            var lastname = fullName.Substring(index + 1);
+            Console.WriteLine("3 Firstname: "+ firstname);
+            Console.WriteLine("4 Lastname: "+ lastname);
+
+            var names = fullName.Split(' ');
+            Console.WriteLine("5 Firstname: " +  names[0]);
+            Console.WriteLine("6 LastName: " + names[1]);
+            Console.WriteLine("7 " + fullName.Replace("Ruchi", "Ruchita"));
+
+        }
     }
 }

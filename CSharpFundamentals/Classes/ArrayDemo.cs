@@ -23,7 +23,6 @@ namespace CSharpFundamentals.Classes
             Console.WriteLine(value[1]);
             Console.WriteLine(value[3]);
         }
-
         public void StringArray()
         {
             var names = new string[3] { "Ruchi", "Bheke","" };

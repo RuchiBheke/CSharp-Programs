@@ -3,6 +3,9 @@ using CSharpFundamentals.Classes;
 using CSharpFundamentals.WorkingWithDates;
 using System;
 using CSharpFundamentals.WorkingWithText;
+using CSharpFundamentals.DataTables;
+using System.Data;
+
 namespace CSharpFundamentals
 {
     public static class ProgramClasses
@@ -30,8 +33,8 @@ namespace CSharpFundamentals
             //enn.Run();
             //enn.ReferenceType();
 
-            StringLearning str = new StringLearning();
-            str.Exp();
+            //StringLearning str = new StringLearning();
+            //str.Exp();
 
             //ArrayListClass arr1 = new ArrayListClass();
             //arr1.ArrayMethod();
@@ -40,6 +43,12 @@ namespace CSharpFundamentals
             //Dates date = new Dates();
             //date.Datetime();
 
+            DataTable dt = DataTableSort.DataTables();
+            string sortvalue = Console.WriteLine("Enter sort value: ");
+            Console.WriteLine(DataTableSort.PrinDataTable(dt));
+
+            DataTable dtSort = DataTableSort.ToSort(dt, sortvalue);
+            Console.WriteLine();
         }
 
     }
