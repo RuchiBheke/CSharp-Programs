@@ -5,6 +5,7 @@ using System;
 using CSharpFundamentals.WorkingWithText;
 using CSharpFundamentals.DataTables;
 using System.Data;
+using CSharpFundamentals.Working_with_Files;
 
 namespace CSharpFundamentals
 {
@@ -35,6 +36,8 @@ namespace CSharpFundamentals
 
             //StringLearning str = new StringLearning();
             //str.Exp();
+            //str.Currency();
+            //str.StringDemo();
 
             //ArrayListClass arr1 = new ArrayListClass();
             //arr1.ArrayMethod();
@@ -43,12 +46,23 @@ namespace CSharpFundamentals
             //Dates date = new Dates();
             //date.Datetime();
 
-            DataTable dt = DataTableSort.DataTables();
-            string sortvalue = Console.WriteLine("Enter sort value: ");
-            Console.WriteLine(DataTableSort.PrinDataTable(dt));
+            //DataTable dt = DataTableSort.DataTables();
+            //string sortvalue = Console.WriteLine("Enter sort value: ");
+            //Console.WriteLine(DataTableSort.PrinDataTable(dt));
 
-            DataTable dtSort = DataTableSort.ToSort(dt, sortvalue);
-            Console.WriteLine();
+            //DataTable dtSort = DataTableSort.ToSort(dt, sortvalue);
+            //Console.WriteLine();
+
+            //SummerizeText sumtext = new SummerizeText();
+            //sumtext.SummerizeTexts();
+
+            //StringBuilders str = new StringBuilders();
+            //str.Stringbuilder();
+
+            FileAndFileInfo fileobj = new FileAndFileInfo();
+            //fileobj.FileInfoAndFile();
+            //fileobj.DirectoryAndDirectoryPath();
+            fileobj.PathDemo();
         }
 
     }

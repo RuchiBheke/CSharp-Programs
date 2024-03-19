@@ -12,6 +12,7 @@ namespace CSharpFundamentals.WorkingWithText
             int i = int.Parse(s);
             int j = Convert.ToInt32(s);
             Console.WriteLine("1 "+s+" "+i+" "+j);
+            //prefer to convert to Int32 becoz if the string is null or empty this method returns the default value for integer which is zero, where as int.Parse will throw execption.
         }
 
         public void Currency()
@@ -20,6 +21,7 @@ namespace CSharpFundamentals.WorkingWithText
             string s = i.ToString();
             string t = i.ToString("c");
             string u = i.ToString("c0");
+            // we have formatted string to convert int into a currency
         }
 
         public void StringDemo()
@@ -38,6 +40,15 @@ namespace CSharpFundamentals.WorkingWithText
             Console.WriteLine("6 LastName: " + names[1]);
             Console.WriteLine("7 " + fullName.Replace("Ruchi", "Ruchita"));
 
+            if (String.IsNullOrEmpty(" ".Trim()))
+                Console.WriteLine("Invalid");
+            var str = "25";
+            var age = Convert.ToByte(str);
+            Console.WriteLine(age);
+
+            float price = 29.95f;
+            Console.WriteLine(price.ToString("C"));
+            Console.WriteLine(price.ToString("C0"));
         }
     }
 }

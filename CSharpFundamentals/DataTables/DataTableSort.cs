@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 
 namespace CSharpFundamentals.DataTables
@@ -100,18 +99,18 @@ namespace CSharpFundamentals.DataTables
             }
             return dt;
         }
-        public static List ConvertDtToList(DataTable dt)
-        {
-            List<Student> studentList = new List<Student>();
-            for (int i = 0; i<dt.Rows.Count; i++)
-            {
-                Student student = new Student();
-                student.StudentId = Convert.ToInt32(dt.Rows[i]["StudentId"]);
-                student.StudentName = dt.Rows[i]["StudentName"].ToString();
-                student.Address = dt.Rows[i]["Address"].ToString();
-                student.MobileNo = dt.Rows[i]["MobileNo"].ToString();
-                studentList.Add(student);
-            }
-        }
-}
+        //public static List ConvertDtToList(DataTable dt)
+        //{
+        //    List<Student> studentList = new List<Student>();
+        //    for (int i = 0; i<dt.Rows.Count; i++)
+        //    {
+        //        Student student = new Student();
+        //        student.StudentId = Convert.ToInt32(dt.Rows[i]["StudentId"]);
+        //        student.StudentName = dt.Rows[i]["StudentName"].ToString();
+        //        student.Address = dt.Rows[i]["Address"].ToString();
+        //        student.MobileNo = dt.Rows[i]["MobileNo"].ToString();
+        //        studentList.Add(student);
+        //    }
+        //}
+    }
 }
