@@ -5,6 +5,7 @@ using System;
 using CSharpFundamentals.WorkingWithText;
 using CSharpFundamentals.DataTables;
 using System.Data;
+using System.Collections.Generic;
 using CSharpFundamentals.Working_with_Files;
 
 namespace CSharpFundamentals
@@ -46,6 +47,16 @@ namespace CSharpFundamentals
             //Dates date = new Dates();
             //date.Datetime();
 
+            DataTable dt = DataTableSort.DataTables();
+            Console.WriteLine("Enter sort value: ");
+            var sortvalue = Console.ReadLine();
+            List<InvestorData> invlist = new List<InvestorData>();
+            invlist =  DataTableSort.ConvertDtToList(dt);
+            DataTableSort.PrinDataTable(dt);
+            Console.WriteLine("\n-----------------------------Sorted Values-------------------------------\n");
+            List<InvestorData> invlistsort = DataTableSort.ToSort(invlist, sortvalue);
+            DataTableSort.PrintList(invlistsort);
+            Console.WriteLine();
             //DataTable dt = DataTableSort.DataTables();
             //string sortvalue = Console.WriteLine("Enter sort value: ");
             //Console.WriteLine(DataTableSort.PrinDataTable(dt));
@@ -72,7 +83,7 @@ namespace CSharpFundamentals
         public static string LastName;
         public static void Introduce()
             {
-                Console.WriteLine("Hi, My name is "+ FirstName+" " +LastName);
+                Console.WriteLine("Hi, My name is "+ FirstName +" "+LastName);
             }
     }
 

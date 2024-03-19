@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Dynamic.Core;
-
+using System.Linq.Expressions;
 namespace CSharpFundamentals.DataTables
 {
     public static class DataTableSort
@@ -39,13 +39,13 @@ namespace CSharpFundamentals.DataTables
                 -3, -3, 0, 0, null, 22168.6907, 906490, 93829, 22, 22, 1556, 12880);
             CustTable.Rows.Add(2061, "ICIC Bank", "Autralia", "Index", null, null, 0.34108, 0.85341,
                 -45, -3, 0, 0, 42426.6264, 22168.6907, 978490, 93829, 21, 20, 1456, 8880);
-            CustTable.Rows.Add(2061, "A&G U1 ", "San Francisco", "Index", 345, null, null, 0.665341,
+            CustTable.Rows.Add(2061, "A&G U1 ", "San Francisco", "Index", 3, null, null, 0.665341,
                 -3, -3, 0, 0, 21426.6264, 22168.6907, 906490, 93829, 22, 22, 1556, 12880);
-            CustTable.Rows.Add(2061, "Philips", "San Francisco", "Index", 9631, 7955, 0.804108, 0.665341,
+            CustTable.Rows.Add(2061, "Philips", "San Francisco", "Index", 631, 7955, 0.804108, 0.665341,
                 -3, -3, 0, 0, 21426.6264, null, 906490, 93829, 22, 22, 1556, null);
-            CustTable.Rows.Add(2061, "Boat  ", "Leeds", "Index", 1243, 7955, 0.804108, null,
+            CustTable.Rows.Add(2061, "Boat  ", "Leeds", "Index", 43, 7955, 0.804108, null,
                 -3, -3,null, 0, 21426.6264, 22168.6907, 906490, 93829, 22, 22, 1556, 12880);
-            CustTable.Rows.Add(2061, "Zara  ", "Berlin", "Index", 9631, null, 0.804108, 0.665341,
+            CustTable.Rows.Add(2061, "Zara  ", "Berlin", "Index", 9, null, 0.804108, 0.665341,
                 -3, -3, 0, 0, null, 22168.6907, 906490, 93829, null, 22, 1556, null);
             CustTable.Rows.Add(2061, "BlackFish ", "Chicago", "Index", 5631, 3155, 0.94108, 0.5341,
                 -3, -3, 0, 0, 21426.6264, 22168.6907, 906490, 93829, 22, 22, 1556, 12880);
@@ -72,7 +72,7 @@ namespace CSharpFundamentals.DataTables
                 {
                     if (direction == "ASC")
                     {
-                        list = list.AsQueryable().OrderBy(column).ToList();
+                        list = list.AsQueryable().OrderBy(column == null? "1": "0", column).ToList();
                     }
                     else
                     {
@@ -82,7 +82,11 @@ namespace CSharpFundamentals.DataTables
             }
             return list;
         }
-        public static DataTable PrinDataTable(DataTable dt)
+        //public static Expression<Func<InvestorData>, object> CreateOrderExpression()
+        //{
+        //    return x => x.column == null ? 1 : 0;
+        //}
+        public static void PrinDataTable(DataTable dt)
         {   
             foreach(DataColumn column in dt.Columns)
             {
@@ -97,20 +101,77 @@ namespace CSharpFundamentals.DataTables
                 }
                 Console.WriteLine("\n\n");
             }
-            return dt;
         }
-        //public static List ConvertDtToList(DataTable dt)
-        //{
-        //    List<Student> studentList = new List<Student>();
-        //    for (int i = 0; i<dt.Rows.Count; i++)
-        //    {
-        //        Student student = new Student();
-        //        student.StudentId = Convert.ToInt32(dt.Rows[i]["StudentId"]);
-        //        student.StudentName = dt.Rows[i]["StudentName"].ToString();
-        //        student.Address = dt.Rows[i]["Address"].ToString();
-        //        student.MobileNo = dt.Rows[i]["MobileNo"].ToString();
-        //        studentList.Add(student);
-        //    }
-        //}
+        public static void PrintList(List<InvestorData> invlist)
+        {
+            int i = 1;
+             foreach(var item in invlist)
+            {
+                {
+                    Console.WriteLine($"InvestorCompanyId: {item.InvestorCompanyId}, InvestorCompanyName: {item.InvestorCompanyName}, LocationName: {item.LocationName}," +
+                        $"InstitutionalInvestorStyleName: {item.InstitutionalInvestorStyleName}, ClientValue1: {item.ClientValue1}, ClientValue2: {item.ClientValue2}, " +
+                        $"ClientValue2: {item.ClientValue2}, PercentIC1: {item.PercentIC1}, PercentIC2: {item.PercentIC2}, ArrowSecurity1: {item.ArrowSecurity1}, ArrowSecurity2: {item.ArrowSecurity2}," +
+                        $"EstMarketSegmentvalue1: {item.EstMarketSegmentvalue1}, EstMarketSegmentvalue2: {item.EstMarketSegmentvalue2}, AvgHoldingvalue1: {item.AvgHoldingvalue1}," +
+                        $"AvgHoldingvalue2: {item.AvgHoldingvalue2}, NumberOfHoldings1: {item.NumberOfHoldings1}, NumberOfHoldings2: {item.NumberOfHoldings2}, Share1: {item.Shares1}, Share2: {item.Shares2}");
+                    i++;
+                }
+                Console.WriteLine();
+            }
+        }
+        public static List<InvestorData> ConvertDtToList(DataTable dt)
+        {
+            List<InvestorData> investorList = new List<InvestorData>();
+            for (int i = 0; i<dt.Rows.Count; i++)
+            {
+                InvestorData investor = new InvestorData();
+                investor.InvestorCompanyId  = dt.Rows[i]["InvestorCompanyId"].ToString();
+                investor.InvestorCompanyName = dt.Rows[i]["InvestorCompanyName"].ToString();
+                investor.LocationName = dt.Rows[i]["LocationName"].ToString();
+                investor.InstitutionalInvestorStyleName = dt.Rows[i]["InstitutionalInvestorStyleName"].ToString();
+                investor.ClientValue1 = ConvertToNullable<long>(dt.Rows[i]["ClientValue1"]);
+                investor.ClientValue2 = ConvertToNullable<long>(dt.Rows[i]["ClientValue2"]);
+                investor.PercentIC1 = ConvertToNullable<Decimal>(dt.Rows[i]["PercentIC1"]);
+                investor.PercentIC2 = ConvertToNullable<Decimal>(dt.Rows[i]["PercentIC2"]);
+                investor.ArrowSecurity1 = ConvertToNullable<int>(dt.Rows[i]["ArrowSecurity1"]);
+                investor.ArrowSecurity2 = ConvertToNullable<int>(dt.Rows[i]["ArrowSecurity2"]);
+                investor.ArrowSegment1 = ConvertToNullable<int>(dt.Rows[i]["ArrowSegment1"]);
+                investor.ArrowSegment2 = ConvertToNullable<int>(dt.Rows[i]["ArrowSegment2"]);
+                investor.EstMarketSegmentvalue1 = ConvertToNullable<Double>(dt.Rows[i]["EstMarketSegmentvalue1"]);
+                investor.EstMarketSegmentvalue2 = ConvertToNullable<Double>(dt.Rows[i]["EstMarketSegmentvalue2"]);
+                investor.AvgHoldingvalue1 = ConvertToNullable<long>(dt.Rows[i]["AvgHoldingvalue1"]);
+                investor.AvgHoldingvalue2 = ConvertToNullable<long>(dt.Rows[i]["AvgHoldingvalue2"]);
+                investor.NumberOfHoldings1 = ConvertToNullable<int>(dt.Rows[i]["NumberOfHoldings1"]);
+                investor.NumberOfHoldings2 = ConvertToNullable<int>(dt.Rows[i]["NumberOfHoldings2"]);
+                investor.Shares1 = ConvertToNullable<long>(dt.Rows[i]["Shares1"]);
+                investor.Shares2 = ConvertToNullable<long>(dt.Rows[i]["Shares2"]);
+                investorList.Add(investor);
+            }
+            return investorList;
+        }
+        public static T? ConvertToNullable<T>(object value) where T : struct
+        {
+            if(value ==null ||value == DBNull.Value)
+            {
+                return null;
+            }
+            try
+            {
+                return (T)Convert.ChangeType(value, typeof(T));
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static DataRow NullCheckLong(this DataRow value)
+        {
+            DataRow flag =  null == DBNull.Value ? null :value;
+            return flag;
+        }
+        public static DataRow NullCheckDecimal(this DataRow value)
+        {
+            DataRow flag = null == DBNull.Value ? null : value;
+            return flag;
+        }
     }
 }

@@ -6,7 +6,6 @@ namespace CSharpFundamentals.Classes
 {
     public class ArrayDemo
     {
-        
         public void Arrayy()
         {
             int[] numbers = new int[3];
