@@ -7,10 +7,11 @@ using CSharpFundamentals.DataTables;
 using System.Data;
 using System.Collections.Generic;
 using CSharpFundamentals.Working_with_Files;
+using CSharpFundamentals.Oops;
 
 namespace CSharpFundamentals
 {
-    public static class ProgramClasses
+    public static class MainClasses
     {
         static void Main(string[] args)
         {
@@ -47,16 +48,16 @@ namespace CSharpFundamentals
             //Dates date = new Dates();
             //date.Datetime();
 
-            DataTable dt = DataTableSort.DataTables();
-            Console.WriteLine("Enter sort value: ");
-            var sortvalue = Console.ReadLine();
-            List<InvestorData> invlist = new List<InvestorData>();
-            invlist =  DataTableSort.ConvertDtToList(dt);
-            DataTableSort.PrinDataTable(dt);
-            Console.WriteLine("\n-----------------------------Sorted Values-------------------------------\n");
-            List<InvestorData> invlistsort = DataTableSort.ToSort(invlist, sortvalue);
-            DataTableSort.PrintList(invlistsort);
-            Console.WriteLine();
+            //DataTable dt = DataTableSort.DataTables();
+            //Console.WriteLine("Enter sort value: ");
+            //var sortvalue = Console.ReadLine();
+            //List<InvestorData> invlist = new List<InvestorData>();
+            //invlist =  DataTableSort.ConvertDtToList(dt);
+            //DataTableSort.PrinDataTable(dt);
+            //Console.WriteLine("\n-----------------------------Sorted Values-------------------------------\n");
+            //List<InvestorData> invlistsort = DataTableSort.ToSort(invlist, sortvalue);
+            //DataTableSort.PrintList(invlistsort);
+            //Console.WriteLine();
             //DataTable dt = DataTableSort.DataTables();
             //string sortvalue = Console.WriteLine("Enter sort value: ");
             //Console.WriteLine(DataTableSort.PrinDataTable(dt));
@@ -67,13 +68,23 @@ namespace CSharpFundamentals
             //SummerizeText sumtext = new SummerizeText();
             //sumtext.SummerizeTexts();
 
-            //StringBuilders str = new StringBuilders();
-            //str.Stringbuilder();
+            StringBuilders str = new StringBuilders();
+            str.Stringbuilder();
 
-            FileAndFileInfo fileobj = new FileAndFileInfo();
+            //FileAndFileInfo fileobj = new FileAndFileInfo();
             //fileobj.FileInfoAndFile();
             //fileobj.DirectoryAndDirectoryPath();
-            fileobj.PathDemo();
+            //fileobj.PathDemo();
+                
+            var person = new Oops.Classes();
+            // Since now we define a constructor for the Classes class we need to pass Name parameter in constuctor call itself.
+            person.Name = "Mosh";
+            person.Id = 4;
+            person.Introduce("Ruchi");
+
+            var order = new Oops.Order();
+            person.Orders.Add(order);
+
         }
 
     }
