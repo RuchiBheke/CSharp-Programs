@@ -85,6 +85,15 @@ namespace CSharpFundamentals
             var order = new Oops.Order();
             person.Orders.Add(order);
 
+            var book = new Book{Isbn ="1111", Title = "C# Advanced"};
+            var numbers = new List();
+            numbers.Add(10);
+
+            var books = new BookList();
+            books.Add(book);
+        
+            var dictionary = new GenericDictionary<string, Book>();
+            dictionary.Add("1234", new Book());
         }
 
     }
