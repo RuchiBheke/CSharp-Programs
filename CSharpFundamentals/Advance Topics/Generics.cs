@@ -47,4 +47,16 @@
             return a > b ? a:b; 
         }
     }
+
+    // types of constarints in C#
+    // where T : IComparable
+    // where T : struct
+    // where T : Product
+    // where T : class
+    // where T : new()
+
+    public class DiscountCalculator<TProduct> where TProduct : Product
+    {
+        public float CalculateDiscount(T)
+    }
 }
